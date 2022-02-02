@@ -70,7 +70,7 @@ fem.main <- function(Y,K,init,nstart,maxit,eps,Tinit,model,kernel='',method){
       if (is.na(Linf_new)){warning("some classes become empty\n",call.=F); break}
       #if (abs(Linf_new - Linf_old) < eps) {break}
       # Better criteria
-      if (abs(Linf_new-Linf_old)<eps*(abs(Linf_old)+eps)){break}
+      if (abs(Linf_new-Linf_old)<sqrt(.Machine$double.eps)*(abs(Linf_old)+sqrt(.Machine$double.eps))){break}
     } 
   }
   
