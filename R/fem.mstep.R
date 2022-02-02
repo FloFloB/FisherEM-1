@@ -72,9 +72,11 @@ fem.mstep <- function(Y,U,T,model,method){
 	  b = rep(bk, K)
 	}
 	
-	# avoid numerical
-	b[b<=0] = 1e-3
-	for (k in 1:K) if (Trace(D[k,,]<1e-3)!=0) test = test+1
+	# avoid numerical but not working on sparse data like CSTR
+	#b[b<=0] = 1e-3
+	#for (k in 1:K) if (Trace(D[k,,]<1e-3)!=0) test = test+1
+	b[b<=0] = sqrt(.Machine$double.eps)#1e-6
+  	for (k in 1:K) if (matrixcalc::matrix.trace(D[k,,]<sqrt(.Machine$double.eps))!=0) test = test+1
 	
 	prms = list(K=K,p=p,mean=mu,my=m,prop=prop,D=D,b=b,model=model,method=method,V=U,test=test)
 }
