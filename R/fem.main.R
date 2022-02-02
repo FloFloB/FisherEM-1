@@ -68,7 +68,9 @@ fem.main <- function(Y,K,init,nstart,maxit,eps,Tinit,model,kernel='',method){
       Linf_old = Linf_new
       Linf_new <- try( Lobs[i] + 1/(1-acc) * (Lobs[i+1] - Lobs[i]))
       if (is.na(Linf_new)){warning("some classes become empty\n",call.=F); break}
-      if (abs(Linf_new - Linf_old) < eps) {break}
+      #if (abs(Linf_new - Linf_old) < eps) {break}
+      # Better criteria
+      if (abs(Linf_new-Linf_old)<eps*(abs(Linf_old)+eps)){break}
     } 
   }
   
