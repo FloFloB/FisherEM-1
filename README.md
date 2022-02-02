@@ -52,7 +52,7 @@ if (length(not_installed_CRAN) > 0) install.packages(not_installed_CRAN)
 <!-- end list -->
 
 ``` r
-remotes::install_github("nicolasJouvin/FisherEM")
+devtools::install_github("FloFloB/FisherEM-1")
 ```
 
 <!-- - For a specific tagged release, use -->
